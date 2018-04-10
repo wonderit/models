@@ -49,16 +49,18 @@ tf.app.flags.DEFINE_string(
 _NUM_SHARDS = 4
 
 def _convert_dataset(dataset_split, dataset_dir, dataset_label_dir):
-  """ Convert the ADE20k dataset into into tfrecord format (SSTable).
+  """ Converts the ADE20k dataset into into tfrecord format (SSTable).
+
   Args:
-    dataset_split: dataset split (e.g., train, val)
-    dataset_dir: dir in which the dataset locates
-    dataset_label_dir: dir in which the annotations locates
+    dataset_split: Dataset split (e.g., train, val).
+    dataset_dir: Dir in which the dataset locates.
+    dataset_label_dir: Dir in which the annotations locates.
+
   Raises:
     RuntimeError: If loaded image and label have different shape.
   """
 
-  img_names = tf.gfile.glob(os.path.join(dataset_dir, '*.jpg'))
+  img_names = tf.gfile.Glob(os.path.join(dataset_dir, '*.jpg'))
   random.shuffle(img_names)
   seg_names = []
   for f in img_names:
